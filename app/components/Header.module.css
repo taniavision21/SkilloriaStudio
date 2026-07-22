@@ -1,0 +1,28 @@
+.header {
+  background: #fff;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eaeaea;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2b6cb0;
+  letter-spacing: -0.5px;
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav a {
+  font-weight: 500;
+  color: #444;
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: #2b6cb0;
+}

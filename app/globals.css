@@ -1,0 +1,48 @@
+/* Reset & base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #fafafa;
+  color: #222;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Button styles */
+.btn-primary {
+  display: inline-block;
+  background: #2b6cb0;
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-decoration: none;
+  font-size: inherit;
+}
+
+.btn-primary:hover {
+  background: #1a4b7a;
+}
