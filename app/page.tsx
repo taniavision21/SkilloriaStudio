@@ -23,39 +23,48 @@ export default function HomePage() {
           gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
         }}
       >
-        <div
+        <Link
+          href="/workshops"
           style={{
             background: '#fff',
             padding: '1.5rem',
             borderRadius: '12px',
             boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            display: 'block',
+            transition: 'transform 0.2s ease, box-shadow 0.2s ease',
           }}
         >
           <h3>📘 Practical Workshops</h3>
           <p>Hands‑on sessions for real‑world applications.</p>
-        </div>
-        <div
+        </Link>
+        <Link
+          href="/mentoring"
           style={{
             background: '#fff',
             padding: '1.5rem',
             borderRadius: '12px',
             boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            display: 'block',
+            transition: 'transform 0.2s ease, box-shadow 0.2s ease',
           }}
         >
           <h3>🧑‍🏫 One‑on‑One Mentoring</h3>
           <p>Personalised guidance to accelerate your learning.</p>
-        </div>
-        <div
+        </Link>
+        <Link
+          href="/about"
           style={{
             background: '#fff',
             padding: '1.5rem',
             borderRadius: '12px',
             boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            display: 'block',
+            transition: 'transform 0.2s ease, box-shadow 0.2s ease',
           }}
         >
           <h3>📚 Course Design</h3>
           <p>Custom curricula for corporate and academic needs.</p>
-        </div>
+        </Link>
       </section>
     </div>
   );
