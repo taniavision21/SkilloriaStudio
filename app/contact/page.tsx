@@ -5,17 +5,24 @@ export default function ContactPage() {
     <div className="container" style={{ paddingTop: '3rem', paddingBottom: '3rem', maxWidth: '600px' }}>
       <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Get in Touch</h1>
       <p style={{ marginBottom: '2rem', color: '#555' }}>
-        Have questions or want to collaborate? Drop us a message.
+        Have questions or want to collaborate? Send your message and it will open in your email app for delivery to the Skilloria Studio inbox.
       </p>
       <form
         style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
         onSubmit={(e) => {
           e.preventDefault();
-          alert('Message sent! (This is a demo)');
+
+          const formData = new FormData(e.currentTarget);
+          const name = encodeURIComponent(String(formData.get('name') || ''));
+          const email = encodeURIComponent(String(formData.get('email') || ''));
+          const message = encodeURIComponent(String(formData.get('message') || ''));
+
+          window.location.href = `mailto:taniavision21@gmail.com?subject=${encodeURIComponent('Contact from Skilloria Studio website')}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
         }}
       >
         <input
           type="text"
+          name="name"
           placeholder="Your Name"
           required
           style={{
@@ -27,6 +34,7 @@ export default function ContactPage() {
         />
         <input
           type="email"
+          name="email"
           placeholder="Your Email"
           required
           style={{
@@ -37,6 +45,7 @@ export default function ContactPage() {
           }}
         />
         <textarea
+          name="message"
           placeholder="Message"
           rows={5}
           required
