@@ -25,6 +25,7 @@ export default function Header() {
           <Link href="/workshops">Workshops</Link>
           <Link href="/mentoring">Mentoring</Link>
           <Link href="/course-design">Course Design</Link>
+          <Link href="/testimonials">Testimonials</Link>
           <Link href="/contact">Contact</Link>
         </nav>
       </div>

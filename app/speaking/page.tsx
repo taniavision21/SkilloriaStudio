@@ -1,13 +1,13 @@
 const featureVideos = [
   {
     title: 'Convocation Speech – Guest Speaker at Algonquin College',
-    url: 'https://www.youtube.com/embed/VIDEO_ID_1',
+    url: 'https://www.youtube.com/embed/hnfGMmBDZ-M?si=KXfUGWaEbBPV-OyY',
     description:
       'This feature highlights a keynote-style convocation speech delivered as a guest speaker at Algonquin College, sharing inspiration, leadership, and practical learning insights with graduates and their families.',
   },
   {
     title: 'Workshop – AI Agents in Real Life at CDI',
-    url: 'https://youtu.be/FYzsl3Z4djA',
+    url: 'https://www.youtube.com/embed/FYzsl3Z4djA?si=QAQ-zqCVYKKNInuL',
     description:
       'A practical workshop delivered at CDI, focused on how AI agents can be applied in real-world contexts, with examples that bridge technology, productivity, and business transformation.',
   },

@@ -1,24 +1,49 @@
 'use client';
 
+import { useState } from 'react';
+
 export default function ContactPage() {
+  const [statusMessage, setStatusMessage] = useState('');
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const payload = {
+      name: String(formData.get('name') || ''),
+      email: String(formData.get('email') || ''),
+      message: String(formData.get('message') || ''),
+    };
+
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      setStatusMessage(result.error || 'Unable to send your message right now.');
+      return;
+    }
+
+    form.reset();
+    setStatusMessage('Thank you! Your message has been received and stored for review by the admin.');
+  }
+
   return (
     <div className="container" style={{ paddingTop: '3rem', paddingBottom: '3rem', maxWidth: '600px' }}>
       <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Get in Touch</h1>
       <p style={{ marginBottom: '2rem', color: '#555' }}>
-        Have questions or want to collaborate? Send your message and it will open in your email app for delivery to the Skilloria Studio inbox.
+        Have questions or want to collaborate? Send your message and it will be stored in the site database for admin review.
       </p>
       <form
         style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
-        onSubmit={(e) => {
-          e.preventDefault();
-
-          const formData = new FormData(e.currentTarget);
-          const name = encodeURIComponent(String(formData.get('name') || ''));
-          const email = encodeURIComponent(String(formData.get('email') || ''));
-          const message = encodeURIComponent(String(formData.get('message') || ''));
-
-          window.location.href = `mailto:taniavision21@gmail.com?subject=${encodeURIComponent('Contact from Skilloria Studio website')}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
-        }}
+        onSubmit={handleSubmit}
       >
         <input
           type="text"
@@ -61,6 +86,12 @@ export default function ContactPage() {
           Send
         </button>
       </form>
+
+      {statusMessage ? (
+        <p style={{ marginTop: '1rem', color: statusMessage.includes('received') ? '#0f766e' : '#b91c1c', fontWeight: 500 }}>
+          {statusMessage}
+        </p>
+      ) : null}
     </div>
   );
 }
