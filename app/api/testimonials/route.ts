@@ -5,7 +5,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const status = searchParams.get('status') || 'approved';
 
-  const submissions = status === 'pending' ? getPendingTestimonials() : getApprovedTestimonials();
+  const submissions = status === 'pending' ? await getPendingTestimonials() : await getApprovedTestimonials();
 
   return NextResponse.json({ submissions });
 }
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const result = saveTestimonial({ name, course, testimonial });
+    const result = await saveTestimonial({ name, course, testimonial });
 
     return NextResponse.json({
       success: true,

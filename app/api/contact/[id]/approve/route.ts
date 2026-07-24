@@ -12,7 +12,7 @@ export async function POST(
     return NextResponse.json({ error: 'Invalid contact id.' }, { status: 400 });
   }
 
-  const result = approveContact(numericId);
+  const result = await approveContact(numericId);
 
   if (result.changes === 0) {
     return NextResponse.json({ error: 'Contact query not found.' }, { status: 404 });

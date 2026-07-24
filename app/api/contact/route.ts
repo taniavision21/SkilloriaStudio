@@ -15,7 +15,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const result = saveContact({ name, email, message });
+    const result = await saveContact({ name, email, message });
 
     return NextResponse.json({
       success: true,

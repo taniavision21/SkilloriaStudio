@@ -12,7 +12,7 @@ export async function DELETE(
     return NextResponse.json({ error: 'Invalid contact id.' }, { status: 400 });
   }
 
-  const result = deleteContact(numericId);
+  const result = await deleteContact(numericId);
 
   if (result.changes === 0) {
     return NextResponse.json({ error: 'Contact query not found.' }, { status: 404 });

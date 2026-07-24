@@ -13,7 +13,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const result = approveTestimonial(id);
+    const result = await approveTestimonial(id);
 
     return NextResponse.json({
       success: true,
