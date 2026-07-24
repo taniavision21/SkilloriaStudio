@@ -11,13 +11,6 @@ const db = new Database(dbPath);
 
 db.pragma('journal_mode = WAL');
 
-const testimonialColumns = db.prepare('PRAGMA table_info(testimonials)').all() as Array<{ name: string }>;
-const hasApprovedColumn = testimonialColumns.some((column) => column.name === 'approved');
-
-if (!hasApprovedColumn) {
-  db.prepare(`ALTER TABLE testimonials ADD COLUMN approved INTEGER NOT NULL DEFAULT 0`).run();
-}
-
 db.prepare(`
   CREATE TABLE IF NOT EXISTS testimonials (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -28,6 +21,13 @@ db.prepare(`
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
   )
 `).run();
+
+const testimonialColumns = db.prepare('PRAGMA table_info(testimonials)').all() as Array<{ name: string }>;
+const hasApprovedColumn = testimonialColumns.some((column) => column.name === 'approved');
+
+if (!hasApprovedColumn) {
+  db.prepare(`ALTER TABLE testimonials ADD COLUMN approved INTEGER NOT NULL DEFAULT 0`).run();
+}
 
 export function saveTestimonial(input: {
   name: string;
