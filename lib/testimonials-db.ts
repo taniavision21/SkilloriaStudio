@@ -1,61 +1,43 @@
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
-import initSqlJs, { Database as SqlJsDatabase } from 'sql.js';
 
-const dbDirectory = path.join(process.cwd(), 'data');
-const dbPath = path.join(dbDirectory, 'testimonials.db');
+const dbDirectory = process.env.VERCEL === '1' || process.env.NODE_ENV === 'production'
+  ? path.join(os.tmpdir(), 'skilloria-data')
+  : path.join(process.cwd(), 'data');
+const dbPath = path.join(dbDirectory, 'testimonials.json');
 
-let db: SqlJsDatabase | null = null;
-let SQL: any = null;
+export type TestimonialRecord = {
+  id: number;
+  name: string;
+  course: string;
+  testimonial: string;
+  approved: boolean;
+  created_at: string;
+};
 
-async function initDatabase() {
-  if (db) return db;
-
-  if (!SQL) {
-    SQL = await initSqlJs();
-  }
-
+function ensureDirectory() {
   fs.mkdirSync(dbDirectory, { recursive: true });
-
-  // Try to load existing database
-  if (fs.existsSync(dbPath)) {
-    const fileBuffer = fs.readFileSync(dbPath);
-    db = new SQL.Database(fileBuffer);
-  } else {
-    db = new SQL.Database();
-  }
-
-  if (!db) throw new Error('Failed to initialize database');
-
-  // Create table if it doesn't exist
-  db.run(`
-    CREATE TABLE IF NOT EXISTS testimonials (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL,
-      course TEXT NOT NULL,
-      testimonial TEXT NOT NULL,
-      approved INTEGER NOT NULL DEFAULT 0,
-      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-    )
-  `);
-
-  // Check and add approved column if missing
-  const columns = db.exec(`PRAGMA table_info(testimonials)`);
-  const hasApprovedColumn = columns.length > 0 && columns[0].values.some((row: any) => row[1] === 'approved');
-  
-  if (!hasApprovedColumn) {
-    db.run(`ALTER TABLE testimonials ADD COLUMN approved INTEGER NOT NULL DEFAULT 0`);
-  }
-
-  saveDatabase();
-  return db;
 }
 
-function saveDatabase() {
-  if (!db) return;
-  const data = db.export();
-  const buffer = Buffer.from(data);
-  fs.writeFileSync(dbPath, buffer);
+function readTestimonials(): TestimonialRecord[] {
+  ensureDirectory();
+
+  if (!fs.existsSync(dbPath)) {
+    return [];
+  }
+
+  const raw = fs.readFileSync(dbPath, 'utf8');
+  try {
+    return JSON.parse(raw) as TestimonialRecord[];
+  } catch {
+    return [];
+  }
+}
+
+function writeTestimonials(data: TestimonialRecord[]) {
+  ensureDirectory();
+  fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf8');
 }
 
 export async function saveTestimonial(input: {
@@ -63,69 +45,46 @@ export async function saveTestimonial(input: {
   course: string;
   testimonial: string;
 }) {
-  const database = await initDatabase();
-  
-  database.run(
-    `INSERT INTO testimonials (name, course, testimonial, approved) VALUES (?, ?, ?, 0)`,
-    [input.name, input.course, input.testimonial]
-  );
+  const testimonials = readTestimonials();
+  const nextId = testimonials.length > 0 ? Math.max(...testimonials.map((item) => item.id)) + 1 : 1;
+  const record: TestimonialRecord = {
+    id: nextId,
+    name: input.name,
+    course: input.course,
+    testimonial: input.testimonial,
+    approved: false,
+    created_at: new Date().toISOString(),
+  };
 
-  saveDatabase();
+  testimonials.push(record);
+  writeTestimonials(testimonials);
 
-  // Get the last inserted ID
-  const result = database.exec(`SELECT last_insert_rowid() as id`);
-  const id = result.length > 0 ? result[0].values[0][0] : 0;
-
-  return { id: Number(id) };
+  return { id: record.id };
 }
 
 export async function getApprovedTestimonials() {
-  const database = await initDatabase();
-
-  const result = database.exec(`
-    SELECT id, name, course, testimonial, created_at
-    FROM testimonials
-    WHERE approved = 1
-    ORDER BY id DESC
-  `);
-
-  if (result.length === 0) return [];
-
-  return result[0].values.map((row: any) => ({
-    id: Number(row[0]),
-    name: String(row[1]),
-    course: String(row[2]),
-    testimonial: String(row[3]),
-    created_at: String(row[4]),
-  }));
+  const testimonials = readTestimonials();
+  return testimonials
+    .filter((item) => item.approved)
+    .sort((a, b) => b.id - a.id);
 }
 
 export async function getPendingTestimonials() {
-  const database = await initDatabase();
-
-  const result = database.exec(`
-    SELECT id, name, course, testimonial, created_at
-    FROM testimonials
-    WHERE approved = 0
-    ORDER BY id DESC
-  `);
-
-  if (result.length === 0) return [];
-
-  return result[0].values.map((row: any) => ({
-    id: Number(row[0]),
-    name: String(row[1]),
-    course: String(row[2]),
-    testimonial: String(row[3]),
-    created_at: String(row[4]),
-  }));
+  const testimonials = readTestimonials();
+  return testimonials
+    .filter((item) => !item.approved)
+    .sort((a, b) => b.id - a.id);
 }
 
 export async function approveTestimonial(id: number) {
-  const database = await initDatabase();
+  const testimonials = readTestimonials();
+  const testimonial = testimonials.find((item) => item.id === id);
 
-  database.run(`UPDATE testimonials SET approved = 1 WHERE id = ?`, [id]);
-  saveDatabase();
+  if (!testimonial) {
+    return { changes: 0 };
+  }
 
+  testimonial.approved = true;
+  writeTestimonials(testimonials);
   return { changes: 1 };
 }

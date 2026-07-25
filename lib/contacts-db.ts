@@ -1,61 +1,43 @@
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
-import initSqlJs, { Database as SqlJsDatabase } from 'sql.js';
 
-const dbDirectory = path.join(process.cwd(), 'data');
-const dbPath = path.join(dbDirectory, 'testimonials.db');
+const dbDirectory = process.env.VERCEL === '1' || process.env.NODE_ENV === 'production'
+  ? path.join(os.tmpdir(), 'skilloria-data')
+  : path.join(process.cwd(), 'data');
+const dbPath = path.join(dbDirectory, 'contacts.json');
 
-let db: SqlJsDatabase | null = null;
-let SQL: any = null;
+export type ContactRecord = {
+  id: number;
+  name: string;
+  email: string;
+  message: string;
+  status: 'new' | 'approved';
+  created_at: string;
+};
 
-async function initDatabase() {
-  if (db) return db;
-
-  if (!SQL) {
-    SQL = await initSqlJs();
-  }
-
+function ensureDirectory() {
   fs.mkdirSync(dbDirectory, { recursive: true });
-
-  // Try to load existing database
-  if (fs.existsSync(dbPath)) {
-    const fileBuffer = fs.readFileSync(dbPath);
-    db = new SQL.Database(fileBuffer);
-  } else {
-    db = new SQL.Database();
-  }
-
-  if (!db) throw new Error('Failed to initialize database');
-
-  // Create table if it doesn't exist
-  db.run(`
-    CREATE TABLE IF NOT EXISTS contacts (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL,
-      email TEXT NOT NULL,
-      message TEXT NOT NULL,
-      status TEXT NOT NULL DEFAULT 'new',
-      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-    )
-  `);
-
-  // Check and add status column if missing
-  const columns = db.exec(`PRAGMA table_info(contacts)`);
-  const hasStatusColumn = columns.length > 0 && columns[0].values.some((row: any) => row[1] === 'status');
-  
-  if (!hasStatusColumn) {
-    db.run(`ALTER TABLE contacts ADD COLUMN status TEXT NOT NULL DEFAULT 'new'`);
-  }
-
-  saveDatabase();
-  return db;
 }
 
-function saveDatabase() {
-  if (!db) return;
-  const data = db.export();
-  const buffer = Buffer.from(data);
-  fs.writeFileSync(dbPath, buffer);
+function readContacts(): ContactRecord[] {
+  ensureDirectory();
+
+  if (!fs.existsSync(dbPath)) {
+    return [];
+  }
+
+  const raw = fs.readFileSync(dbPath, 'utf8');
+  try {
+    return JSON.parse(raw) as ContactRecord[];
+  } catch {
+    return [];
+  }
+}
+
+function writeContacts(data: ContactRecord[]) {
+  ensureDirectory();
+  fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf8');
 }
 
 export async function saveContact(input: {
@@ -63,57 +45,48 @@ export async function saveContact(input: {
   email: string;
   message: string;
 }) {
-  const database = await initDatabase();
+  const contacts = readContacts();
+  const nextId = contacts.length > 0 ? Math.max(...contacts.map((item) => item.id)) + 1 : 1;
+  const record: ContactRecord = {
+    id: nextId,
+    name: input.name,
+    email: input.email,
+    message: input.message,
+    status: 'new',
+    created_at: new Date().toISOString(),
+  };
 
-  database.run(
-    `INSERT INTO contacts (name, email, message, status) VALUES (?, ?, ?, 'new')`,
-    [input.name, input.email, input.message]
-  );
+  contacts.push(record);
+  writeContacts(contacts);
 
-  saveDatabase();
-
-  // Get the last inserted ID
-  const result = database.exec(`SELECT last_insert_rowid() as id`);
-  const id = result.length > 0 ? result[0].values[0][0] : 0;
-
-  return { id: Number(id) };
+  return { id: record.id };
 }
 
 export async function getContacts() {
-  const database = await initDatabase();
-
-  const result = database.exec(`
-    SELECT id, name, email, message, status, created_at
-    FROM contacts
-    ORDER BY id DESC
-  `);
-
-  if (result.length === 0) return [];
-
-  return result[0].values.map((row: any) => ({
-    id: Number(row[0]),
-    name: String(row[1]),
-    email: String(row[2]),
-    message: String(row[3]),
-    status: String(row[4]),
-    created_at: String(row[5]),
-  }));
+  return readContacts().sort((a, b) => b.id - a.id);
 }
 
 export async function approveContact(id: number) {
-  const database = await initDatabase();
+  const contacts = readContacts();
+  const contact = contacts.find((item) => item.id === id);
 
-  database.run(`UPDATE contacts SET status = 'approved' WHERE id = ?`, [id]);
-  saveDatabase();
+  if (!contact) {
+    return { changes: 0 };
+  }
 
+  contact.status = 'approved';
+  writeContacts(contacts);
   return { changes: 1 };
 }
 
 export async function deleteContact(id: number) {
-  const database = await initDatabase();
+  const contacts = readContacts();
+  const remaining = contacts.filter((item) => item.id !== id);
 
-  database.run(`DELETE FROM contacts WHERE id = ?`, [id]);
-  saveDatabase();
+  if (remaining.length === contacts.length) {
+    return { changes: 0 };
+  }
 
+  writeContacts(remaining);
   return { changes: 1 };
 }
