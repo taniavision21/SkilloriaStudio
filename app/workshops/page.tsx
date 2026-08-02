@@ -1,37 +1,44 @@
+import Link from 'next/link';
 import { Brain, Shield, Code2, Database, Cloud, Presentation } from 'lucide-react';
 
 const workshops = [
   {
+    href: '/workshops/ai-generative-ai',
     icon: <Brain className="w-10 h-10 text-teal-600" />,
     title: 'Artificial Intelligence & Generative AI',
     description:
       'Interactive workshops covering AI fundamentals, ChatGPT, AI agents, prompt engineering, automation, and practical business applications.',
   },
   {
+    href: '/workshops/data-science-machine-learning',
     icon: <Database className="w-10 h-10 text-teal-600" />,
     title: 'Data Science & Machine Learning',
     description:
       'Hands-on sessions in Python, data visualization, predictive analytics, machine learning, and deep learning using real-world datasets.',
   },
   {
+    href: '/workshops/cybersecurity-linux-administration',
     icon: <Shield className="w-10 h-10 text-teal-600" />,
     title: 'Cybersecurity & Linux Administration',
     description:
       'Practical cybersecurity awareness, Linux system administration, shell scripting, networking, and server security workshops.',
   },
   {
+    href: '/workshops/programming-bootcamps',
     icon: <Code2 className="w-10 h-10 text-teal-600" />,
     title: 'Programming Bootcamps',
     description:
       'Instructor-led bootcamps in Python, Java, C#, JavaScript, SQL, PHP, and full-stack web development.',
   },
   {
+    href: '/workshops/cloud-devops',
     icon: <Cloud className="w-10 h-10 text-teal-600" />,
     title: 'Cloud & DevOps',
     description:
       'Learn Docker, virtualization, cloud fundamentals, Azure, AWS, Git, CI/CD, and deployment best practices.',
   },
   {
+    href: '/workshops/corporate-ai-workshops',
     icon: <Presentation className="w-10 h-10 text-teal-600" />,
     title: 'Corporate AI Workshops',
     description:
@@ -59,19 +66,30 @@ export default function WorkshopsPage() {
         }}
       >
         {workshops.map((item, index) => (
-          <article
+          <Link
             key={index}
+            href={item.href}
             style={{
-              background: '#fff',
-              borderRadius: '14px',
-              padding: '1.5rem',
-              boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
+              textDecoration: 'none',
+              color: 'inherit',
             }}
           >
-            <div style={{ marginBottom: '0.8rem' }}>{item.icon}</div>
-            <h2 style={{ fontSize: '1.6rem', marginBottom: '0.5rem' }}>{item.title}</h2>
-            <p style={{ color: '#555', lineHeight: 1.7 }}>{item.description}</p>
-          </article>
+            <article
+              style={{
+                background: '#fff',
+                borderRadius: '14px',
+                padding: '1.5rem',
+                boxShadow: '0 4px 14px rgba(0,0,0,0.08)',
+                cursor: 'pointer',
+                height: '100%',
+                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              }}
+            >
+              <div style={{ marginBottom: '0.8rem' }}>{item.icon}</div>
+              <h2 style={{ fontSize: '1.6rem', marginBottom: '0.5rem' }}>{item.title}</h2>
+              <p style={{ color: '#555', lineHeight: 1.7 }}>{item.description}</p>
+            </article>
+          </Link>
         ))}
       </section>
     </div>

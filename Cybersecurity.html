@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cybersecurity & Linux Administration Workshop | Skilloria Studio</title>
+    <!-- Font Awesome (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ----- global reset & base ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #edf2f7;
+            color: #0b1a2b;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 30, 60, 0.18);
+            padding: 2.5rem 2rem;
+            transition: all 0.2s ease;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 3.5rem 3rem;
+            }
+            body {
+                padding: 3rem 2rem;
+            }
+        }
+
+        /* ----- typography ----- */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(145deg, #0b2b44, #0a6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.35rem;
+            display: inline-block;
+        }
+
+        .subhead {
+            font-size: 1.1rem;
+            color: #1c4b5e;
+            font-weight: 400;
+            margin-top: 0.25rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #0d9488;
+            padding-left: 1rem;
+            background: #e6f7f5;
+            border-radius: 0 8px 8px 0;
+            padding: 0.75rem 1.25rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 2.2rem 0 1.2rem 0;
+            color: #0b2b44;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        h2 i {
+            color: #0d9488;
+            font-size: 1.6rem;
+            width: 2rem;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.8rem 0 0.8rem 0;
+            color: #0b2b44;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h3 i {
+            color: #0d9488;
+            font-size: 1.2rem;
+            width: 1.8rem;
+            text-align: center;
+        }
+
+        h4 {
+            font-size: 1.05rem;
+            margin: 1.2rem 0 0.4rem 0;
+            color: #0b2b44;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #1c3b4f;
+        }
+
+        /* ----- hero / intro block ----- */
+        .hero {
+            margin-bottom: 2rem;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: #d5f5f2;
+            color: #0a6b6b;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 1rem;
+            border-radius: 100px;
+            letter-spacing: 0.3px;
+            margin-bottom: 0.75rem;
+            border: 1px solid #99e6e0;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #1c4b5e;
+            max-width: 800px;
+        }
+
+        /* ----- workshop overview (two-col layout on large) ----- */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            background: #eef9f7;
+            border-radius: 1.5rem;
+            padding: 1.5rem 1.8rem;
+            margin: 1.8rem 0 2.2rem 0;
+            border: 1px solid #b7e6e0;
+        }
+
+        @media (min-width: 768px) {
+            .overview-grid {
+                grid-template-columns: 1fr 1fr;
+                padding: 2rem 2.2rem;
+            }
+        }
+
+        .overview-grid .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 500;
+            color: #0b2b44;
+        }
+
+        .overview-grid .stat-item i {
+            color: #0d9488;
+            font-size: 1.4rem;
+            width: 2rem;
+            text-align: center;
+        }
+
+        .overview-grid .stat-item span {
+            font-weight: 400;
+            color: #1c4b5e;
+        }
+
+        /* ----- module cards ----- */
+        .module-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        @media (min-width: 640px) {
+            .module-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .module-grid {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+        }
+
+        .module-card {
+            background: #ffffff;
+            border-radius: 1.2rem;
+            padding: 1.5rem 1.3rem;
+            box-shadow: 0 4px 12px rgba(0, 50, 50, 0.06);
+            border: 1px solid #d5f5f2;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px -8px rgba(0, 80, 80, 0.12);
+            border-color: #66d4cc;
+        }
+
+        .module-card .card-icon {
+            background: #d5f5f2;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #0a6b6b;
+            margin-bottom: 0.9rem;
+        }
+
+        .module-card h4 {
+            margin-top: 0;
+            margin-bottom: 0.4rem;
+            font-size: 1.1rem;
+        }
+
+        .module-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.4rem 0 0 0;
+        }
+
+        .module-card ul li {
+            font-size: 0.95rem;
+            color: #1c3b4f;
+            padding: 0.3rem 0 0.3rem 1.3rem;
+            position: relative;
+            border-bottom: 1px solid #eef9f7;
+        }
+
+        .module-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .module-card ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #0d9488;
+            font-weight: 600;
+        }
+
+        /* ----- hands-on & who should attend (two col) ----- */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 2rem 0 1.5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .feature-block {
+            background: #f7fcfb;
+            border-radius: 1.5rem;
+            padding: 1.8rem 1.8rem 1.2rem 1.8rem;
+            border: 1px solid #d5f5f2;
+        }
+
+        .feature-block ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0 0;
+        }
+
+        .feature-block ul li {
+            padding: 0.5rem 0 0.5rem 1.8rem;
+            position: relative;
+            font-size: 1rem;
+            color: #1c3b4f;
+            border-bottom: 1px solid #eef9f7;
+        }
+
+        .feature-block ul li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-block ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0d9488;
+            font-weight: 700;
+        }
+
+        .feature-block .icon-big {
+            font-size: 2rem;
+            color: #0d9488;
+            margin-bottom: 0.3rem;
+            display: inline-block;
+        }
+
+        /* ----- CTA / contact ----- */
+        .cta-section {
+            background: #0b2b44;
+            border-radius: 1.5rem;
+            padding: 2.2rem 2rem;
+            margin: 2.8rem 0 0.5rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: #ffffff;
+            border: 1px solid #1c5a6b;
+        }
+
+        .cta-section h2 {
+            color: #ffffff;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.8rem;
+        }
+
+        .cta-section h2 i {
+            color: #66d4cc;
+        }
+
+        .cta-section p {
+            color: #cce8e5;
+            max-width: 550px;
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            background: #0d9488;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.85rem 2.2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.1s ease;
+            border: 1px solid #66d4cc;
+            box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+        }
+
+        .cta-btn:hover {
+            background: #0a6b6b;
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(13, 148, 136, 0.45);
+        }
+
+        .cta-btn i {
+            font-size: 1rem;
+        }
+
+        /* ----- divider / separator ----- */
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, #d5f5f2, transparent);
+            margin: 1.8rem 0 0.5rem 0;
+            border: 0;
+        }
+
+        /* ----- utility spacing ----- */
+        .mt-1 {
+            margin-top: 0.5rem;
+        }
+        .mt-2 {
+            margin-top: 1.5rem;
+        }
+        .mb-1 {
+            margin-bottom: 0.5rem;
+        }
+        .text-muted {
+            color: #4a7a7a;
+        }
+
+        /* small screens tweaks */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            .cta-section {
+                padding: 1.8rem 1.2rem;
+            }
+            .cta-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-links a,
+        .footer-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            text-decoration: none;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+
+        .nav-links a:hover,
+        .footer-nav a:hover {
+            background: #fee2e2;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin: 1rem 0 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+            <a href="/about"><i class="fas fa-info-circle"></i> About</a>
+            <a href="/workshops"><i class="fas fa-tools"></i> Workshops</a>
+            <a href="/contact"><i class="fas fa-envelope"></i> Contact</a>
+        </div>
+
+        <!-- ====== HERO ====== -->
+        <div class="hero">
+            <div class="badge"><i class="fas fa-graduation-cap" style="margin-right:6px;"></i> Skilloria Studio</div>
+            <h1>Cybersecurity &amp; Linux Administration Workshop</h1>
+            <div class="subhead">
+                <i class="fas fa-shield-halved" style="margin-right:10px; color:#0d9488;"></i>
+                Practical, hands-on workshops that turn concepts into real-world capability.
+            </div>
+            <p>
+                Skilloria Studio delivers practical, hands-on workshops that help students, professionals,
+                and organizations turn technology concepts into real-world capability. This professional
+                workshop bridges the gap between core system administration and proactive defense,
+                ensuring you can securely manage, harden, and audit Linux environments.
+            </p>
+        </div>
+
+        <!-- ====== WORKSHOP OVERVIEW ====== -->
+        <div class="overview-grid">
+            <div class="stat-item">
+                <i class="fas fa-server"></i>
+                <span><strong>Linux Administration</strong><br />Foundational operations &amp; system management</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-lock"></i>
+                <span><strong>Defensive Security</strong><br />Hardening, auditing &amp; threat detection</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-terminal"></i>
+                <span><strong>Realistic Labs</strong><br />Hands‑on terminal exercises &amp; scenarios</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-arrows-spin"></i>
+                <span><strong>Automation &amp; Scale</strong><br />Ansible, container security &amp; identity</span>
+            </div>
+        </div>
+
+        <!-- ====== KEY MODULES ====== -->
+        <h2><i class="fas fa-cubes"></i> Key Modules &amp; Curriculum</h2>
+
+        <div class="module-grid">
+
+            <!-- Module 1 -->
+            <div class="module-card">
+                <div class="card-icon"><i class="fas fa-laptop"></i></div>
+                <h4>1. Foundational Linux Administration</h4>
+                <ul>
+                    <li><strong>Linux Architecture &amp; FHS:</strong> Navigating filesystem, configs, logs</li>
+                    <li><strong>User &amp; Group Management:</strong> Sudoers, password policies</li>
+                    <li><strong>Permissions &amp; ACLs:</strong> chmod, chown, Access Control Lists</li>
+                    <li><strong>Process &amp; Service Management:</strong> systemd, systemctl, monitoring</li>
+                    <li><strong>Package Management:</strong> apt, yum/dnf – install, update, maintain</li>
+                </ul>
+            </div>
+
+            <!-- Module 2 -->
+            <div class="module-card">
+                <div class="card-icon"><i class="fas fa-shield"></i></div>
+                <h4>2. Linux Hardening &amp; Defensive Security</h4>
+                <ul>
+                    <li><strong>Network &amp; Firewall:</strong> ufw rules, interface management</li>
+                    <li><strong>Secure Remote Access (SSH):</strong> Disable root, key‑based auth</li>
+                    <li><strong>System Auditing &amp; Logging:</strong> auditd, log centralization</li>
+                    <li><strong>Kernel Hardening:</strong> sysctl.conf for network‑layer defense</li>
+                </ul>
+            </div>
+
+            <!-- Module 3 -->
+            <div class="module-card">
+                <div class="card-icon"><i class="fas fa-bug"></i></div>
+                <h4>3. Vulnerability Assessment &amp; Threat Detection</h4>
+                <ul>
+                    <li><strong>Vulnerability Scanning:</strong> Lynis for config &amp; patch audits</li>
+                    <li><strong>File Integrity Monitoring (FIM):</strong> Track changes to critical files</li>
+                    <li><strong>Log Analysis &amp; Threat Hunting:</strong> Identify brute‑force &amp; anomalies</li>
+                    <li><strong>Malware &amp; Rootkit Detection:</strong> Scan for hidden threats &amp; backdoors</li>
+                </ul>
+            </div>
+
+            <!-- Module 4 -->
+            <div class="module-card">
+                <div class="card-icon"><i class="fas fa-cloud"></i></div>
+                <h4>4. Enterprise Scale: Automation &amp; Identity</h4>
+                <ul>
+                    <li><strong>Centralized Authentication:</strong> Manage user identity at scale</li>
+                    <li><strong>Container Security:</strong> Namespaces, cgroups (Docker/Podman)</li>
+                    <li><strong>Automated Hardening:</strong> Enforce baselines with Ansible</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ====== HANDS-ON + WHO SHOULD ATTEND (two-col) ====== -->
+        <div class="feature-grid">
+
+            <!-- Hands-on -->
+            <div class="feature-block">
+                <div class="icon-big"><i class="fas fa-hand-pointer"></i></div>
+                <h3 style="margin-top:0.2rem;"><i class="fas fa-code"></i> Hands-On Learning Experience</h3>
+                <ul>
+                    <li><strong>Interactive Terminal Labs:</strong> Practical exercises that reinforce theory with execution.</li>
+                    <li><strong>Real-World Scenarios:</strong> Troubleshoot permissions, lock down SSH, write firewall rules, investigate compromises.</li>
+                    <li><strong>Takeaway Resources:</strong> Implementation checklists, configuration scripts, and lab guides.</li>
+                </ul>
+            </div>
+
+            <!-- Who should attend -->
+            <div class="feature-block">
+                <div class="icon-big"><i class="fas fa-users"></i></div>
+                <h3 style="margin-top:0.2rem;"><i class="fas fa-user-check"></i> Who Should Attend?</h3>
+                <ul>
+                    <li><strong>IT Professionals &amp; System Administrators</strong> leveling up their security posture.</li>
+                    <li><strong>DevOps Engineers</strong> securing cloud workloads and containerized infrastructure.</li>
+                    <li><strong>Aspiring Cybersecurity Analysts</strong> building a strong Linux defense foundation.</li>
+                    <li><strong>Students &amp; Tech Enthusiasts</strong> aiming for industry‑ready technical skills.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ====== DIVIDER ====== -->
+        <hr class="divider" />
+
+        <!-- ====== CTA ====== -->
+        <div class="cta-section">
+            <h2><i class="fas fa-bolt"></i> Ready to secure your Linux infrastructure?</h2>
+            <p>
+                Schedule this workshop for your team or organization and start building
+                a proactive, defensible Linux environment.
+            </p>
+            <a href="https://www.google.com/search?q=%23" target="_blank" class="cta-btn">
+                <i class="fas fa-calendar-check"></i> Contact us today
+            </a>
+        </div>
+
+        <!-- small footer note -->
+        <p style="text-align:center; margin-top:2rem; font-size:0.85rem; color:#4a7a7a; border-top:1px solid #eef9f7; padding-top:1.5rem;">
+            <i class="fas fa-cube" style="margin-right:6px; color:#0d9488;"></i>
+            Skilloria Studio — Cybersecurity &amp; Linux Administration Workshop
+        </p>
+
+    </div>
+    <!-- end container -->
+</body>
+</html>

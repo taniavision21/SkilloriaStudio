@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artificial Intelligence & Generative AI Workshop | Skilloria Studio</title>
+    <!-- Font Awesome (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ----- global reset & base ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f3ff;
+            color: #1a102b;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(88, 28, 135, 0.15);
+            padding: 2.5rem 2rem;
+            transition: all 0.2s ease;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 3.5rem 3rem;
+            }
+            body {
+                padding: 3rem 2rem;
+            }
+        }
+
+        /* ----- typography ----- */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(145deg, #2d1b4e, #6d28d9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.35rem;
+            display: inline-block;
+        }
+
+        .subhead {
+            font-size: 1.1rem;
+            color: #4b3a6b;
+            font-weight: 400;
+            margin-top: 0.25rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #7c3aed;
+            padding-left: 1rem;
+            background: #f0ecff;
+            border-radius: 0 8px 8px 0;
+            padding: 0.75rem 1.25rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 2.2rem 0 1.2rem 0;
+            color: #1a102b;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        h2 i {
+            color: #7c3aed;
+            font-size: 1.6rem;
+            width: 2rem;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.8rem 0 0.8rem 0;
+            color: #2d1b4e;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h3 i {
+            color: #7c3aed;
+            font-size: 1.2rem;
+            width: 1.8rem;
+            text-align: center;
+        }
+
+        h4 {
+            font-size: 1.05rem;
+            margin: 1.2rem 0 0.4rem 0;
+            color: #2d1b4e;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #2d1b4e;
+        }
+
+        /* ----- hero / intro block ----- */
+        .hero {
+            margin-bottom: 2rem;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: #ede9fe;
+            color: #5b21b6;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 1rem;
+            border-radius: 100px;
+            letter-spacing: 0.3px;
+            margin-bottom: 0.75rem;
+            border: 1px solid #c4b5fd;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #2d1b4e;
+            max-width: 800px;
+        }
+
+        /* ----- workshop overview (two-col layout on large) ----- */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            background: #f5f0ff;
+            border-radius: 1.5rem;
+            padding: 1.5rem 1.8rem;
+            margin: 1.8rem 0 2.2rem 0;
+            border: 1px solid #ddd6fe;
+        }
+
+        @media (min-width: 768px) {
+            .overview-grid {
+                grid-template-columns: 1fr 1fr;
+                padding: 2rem 2.2rem;
+            }
+        }
+
+        .overview-grid .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 500;
+            color: #1a102b;
+        }
+
+        .overview-grid .stat-item i {
+            color: #7c3aed;
+            font-size: 1.4rem;
+            width: 2rem;
+            text-align: center;
+        }
+
+        .overview-grid .stat-item span {
+            font-weight: 400;
+            color: #4b3a6b;
+        }
+
+        /* ----- module cards ----- */
+        .module-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        @media (min-width: 640px) {
+            .module-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .module-grid {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+        }
+
+        .module-card {
+            background: #ffffff;
+            border-radius: 1.2rem;
+            padding: 1.5rem 1.3rem;
+            box-shadow: 0 4px 12px rgba(88, 28, 135, 0.06);
+            border: 1px solid #ede9fe;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px -8px rgba(88, 28, 135, 0.15);
+            border-color: #c4b5fd;
+        }
+
+        .module-card .card-icon {
+            background: #ede9fe;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #5b21b6;
+            margin-bottom: 0.9rem;
+        }
+
+        .module-card h4 {
+            margin-top: 0;
+            margin-bottom: 0.4rem;
+            font-size: 1.1rem;
+        }
+
+        .module-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.4rem 0 0 0;
+        }
+
+        .module-card ul li {
+            font-size: 0.95rem;
+            color: #2d1b4e;
+            padding: 0.3rem 0 0.3rem 1.3rem;
+            position: relative;
+            border-bottom: 1px solid #f5f0ff;
+        }
+
+        .module-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .module-card ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #7c3aed;
+            font-weight: 600;
+        }
+
+        /* ----- hands-on & who should attend (two col) ----- */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 2rem 0 1.5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .feature-block {
+            background: #faf8ff;
+            border-radius: 1.5rem;
+            padding: 1.8rem 1.8rem 1.2rem 1.8rem;
+            border: 1px solid #ede9fe;
+        }
+
+        .feature-block ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0 0;
+        }
+
+        .feature-block ul li {
+            padding: 0.5rem 0 0.5rem 1.8rem;
+            position: relative;
+            font-size: 1rem;
+            color: #2d1b4e;
+            border-bottom: 1px solid #f0ecff;
+        }
+
+        .feature-block ul li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-block ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #7c3aed;
+            font-weight: 700;
+        }
+
+        .feature-block .icon-big {
+            font-size: 2rem;
+            color: #7c3aed;
+            margin-bottom: 0.3rem;
+            display: inline-block;
+        }
+
+        /* ----- CTA / contact ----- */
+        .cta-section {
+            background: #1a102b;
+            border-radius: 1.5rem;
+            padding: 2.2rem 2rem;
+            margin: 2.8rem 0 0.5rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: #ffffff;
+            border: 1px solid #4b3a6b;
+        }
+
+        .cta-section h2 {
+            color: #ffffff;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.8rem;
+        }
+
+        .cta-section h2 i {
+            color: #a78bfa;
+        }
+
+        .cta-section p {
+            color: #d4caf0;
+            max-width: 550px;
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            background: #7c3aed;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.85rem 2.2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.1s ease;
+            border: 1px solid #a78bfa;
+            box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+        }
+
+        .cta-btn:hover {
+            background: #6d28d9;
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.45);
+        }
+
+        .cta-btn i {
+            font-size: 1rem;
+        }
+
+        /* ----- divider / separator ----- */
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, #ede9fe, transparent);
+            margin: 1.8rem 0 0.5rem 0;
+            border: 0;
+        }
+
+        /* ----- utility spacing ----- */
+        .mt-1 {
+            margin-top: 0.5rem;
+        }
+        .mt-2 {
+            margin-top: 1.5rem;
+        }
+        .mb-1 {
+            margin-bottom: 0.5rem;
+        }
+        .text-muted {
+            color: #6b5a8a;
+        }
+
+        /* small screens tweaks */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            .cta-section {
+                padding: 1.8rem 1.2rem;
+            }
+            .cta-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ====== HERO ====== -->
+        <div class="hero">
+            <div class="badge"><i class="fas fa-graduation-cap" style="margin-right:6px;"></i> Skilloria Studio</div>
+            <h1>Artificial Intelligence &amp; Generative AI Workshop</h1>
+            <div class="subhead">
+                <i class="fas fa-robot" style="margin-right:10px; color:#7c3aed;"></i>
+                Practical, hands-on workshops that turn concepts into real-world capability.
+            </div>
+            <p>
+                Skilloria Studio delivers practical, hands-on workshops that help students, professionals,
+                and organizations turn technology concepts into real-world capability. This professional
+                workshop bridges the gap between foundational artificial intelligence and modern
+                generative tools, equipping you to leverage AI for enhanced productivity, workflow
+                automation, and creative problem-solving.
+            </p>
+        </div>
+
+        <!-- ====== WORKSHOP OVERVIEW ====== -->
+        <div class="overview-grid">
+            <div class="stat-item">
+                <i class="fas fa-robot"></i>
+                <span><strong>Generative AI Focus</strong><br />From LLMs to autonomous agents</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-pen-fancy"></i>
+                <span><strong>Prompt Engineering</strong><br />Master effective AI collaboration</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-cogs"></i>
+                <span><strong>Workflow Automation</strong><br />Build multi-step AI agents</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-shield-alt"></i>
+                <span><strong>Responsible AI</strong><br />Security, ethics &amp; best practices</span>
+            </div>
+        </div>
+
+        <!-- ====== KEY MODULES ====== -->
+        <h2><i class="fas fa-cubes"></i> Key Modules &amp; Curriculum</h2>
+
+        <div class="module-grid">
+
+            <!-- Module 1 -->
+            <div class="module-card">
+                <div class="card-icon"><i class="fas fa-brain"></i></div>
+                <h4>1. Foundations of AI &amp; Generative AI</h4>
+                <ul>
+                    <li><strong>AI Landscape:</strong> Evolution of AI, ML, and generative models / LLMs</li>
+                    <li><strong>How GenAI Works:</strong> Transformers, tokenization, text generation</li>
+                    <li><strong>Ecosystem &amp; Tooling:</strong> Platforms, APIs, open-source models</li>
+                </ul>
+            </div>
+
+            <!-- Module 2 -->
+            <div class="module-card">
+                <div class="card-icon"><i class="fas fa-message"></i></div>
+                <h4>2. Prompt Engineering &amp; Collaboration</h4>
+                <ul>
+                    <li><strong>Anatomy of a Great Prompt:</strong> Context, instructions, constraints, formatting</li>
+                    <li><strong>Advanced Techniques:</strong> Few-shot, chain-of-thought, persona-based</li>
+                    <li><strong>Iterative Refinement:</strong> Debugging, handling hallucinations &amp; bias</li>
+                </ul>
+            </div>
+
+            <!-- Module 3 -->
+            <div class="module-card">
+                <div class="card-icon"><i class="fas fa-arrows-spin"></i></div>
+                <h4>3. AI Agents &amp; Workflow Automation</h4>
+                <ul>
+                    <li><strong>AI Agents:</strong> From chat to autonomous multi-step execution</li>
+                    <li><strong>Tool Use &amp; Integrations:</strong> External data, search, local files</li>
+                    <li><strong>Automating Tasks:</strong> Scripts for data processing, reports, content</li>
+                </ul>
+            </div>
+
+            <!-- Module 4 -->
+            <div class="module-card">
+                <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+                <h4>4. Business Applications &amp; Ethics</h4>
+                <ul>
+                    <li><strong>Enterprise Integration:</strong> Marketing, dev, data, support use cases</li>
+                    <li><strong>Security &amp; Privacy:</strong> Data handling, retention, prompt injection</li>
+                    <li><strong>Responsible AI:</strong> Ethics, copyright, human-in-the-loop oversight</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ====== HANDS-ON + WHO SHOULD ATTEND (two-col) ====== -->
+        <div class="feature-grid">
+
+            <!-- Hands-on -->
+            <div class="feature-block">
+                <div class="icon-big"><i class="fas fa-hand-pointer"></i></div>
+                <h3 style="margin-top:0.2rem;"><i class="fas fa-code"></i> Hands-On Learning Experience</h3>
+                <ul>
+                    <li><strong>Interactive Sessions:</strong> Live demonstrations and practical exercises for real-world proficiency.</li>
+                    <li><strong>Real-World Scenarios:</strong> Build structured prompts, automate workflows, solve domain-specific challenges.</li>
+                    <li><strong>Takeaway Resources:</strong> Prompt libraries, workflow templates, and implementation guides.</li>
+                </ul>
+            </div>
+
+            <!-- Who should attend -->
+            <div class="feature-block">
+                <div class="icon-big"><i class="fas fa-users"></i></div>
+                <h3 style="margin-top:0.2rem;"><i class="fas fa-user-check"></i> Who Should Attend?</h3>
+                <ul>
+                    <li><strong>Business Leaders &amp; Professionals</strong> boosting productivity with AI.</li>
+                    <li><strong>Software Engineers &amp; Developers</strong> integrating AI tools and APIs.</li>
+                    <li><strong>Content Creators &amp; Marketers</strong> scaling ideation and creation workflows.</li>
+                    <li><strong>Students &amp; Tech Enthusiasts</strong> building future-ready AI skills.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ====== DIVIDER ====== -->
+        <hr class="divider" />
+
+        <!-- ====== CTA ====== -->
+        <div class="cta-section">
+            <h2><i class="fas fa-bolt"></i> Ready to accelerate your workflow with AI?</h2>
+            <p>
+                Schedule this workshop for your team or organization and start leveraging
+                artificial intelligence for enhanced productivity and innovation.
+            </p>
+            <a href="https://www.google.com/search?q=%23" target="_blank" class="cta-btn">
+                <i class="fas fa-calendar-check"></i> Contact us today
+            </a>
+        </div>
+
+        <div class="footer-nav">
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+            <a href="/about"><i class="fas fa-info-circle"></i> About</a>
+            <a href="/workshops"><i class="fas fa-tools"></i> Workshops</a>
+            <a href="/contact"><i class="fas fa-envelope"></i> Contact</a>
+        </div>
+
+        <!-- small footer note -->
+        <p style="text-align:center; margin-top:2rem; font-size:0.85rem; color:#6b5a8a; border-top:1px solid #f0ecff; padding-top:1.5rem;">
+            <i class="fas fa-cube" style="margin-right:6px; color:#7c3aed;"></i>
+            Skilloria Studio — Artificial Intelligence &amp; Generative AI Workshop
+        </p>
+
+    </div>
+    <!-- end container -->
+</body>
+</html>

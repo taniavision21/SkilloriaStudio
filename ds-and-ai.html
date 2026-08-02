@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Science & Machine Learning Workshop | Skilloria Studio</title>
+    <!-- Font Awesome (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ----- global reset & base ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f8fafc;
+            color: #0b1a2b;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            padding: 2.5rem 2rem;
+            transition: all 0.2s ease;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 3.5rem 3rem;
+            }
+            body {
+                padding: 3rem 2rem;
+            }
+        }
+
+        /* ----- typography ----- */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(145deg, #0b1a2b, #1e3a5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.35rem;
+            display: inline-block;
+        }
+
+        .subhead {
+            font-size: 1.1rem;
+            color: #2c4b6e;
+            font-weight: 400;
+            margin-top: 0.25rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+            background: #f0f6ff;
+            border-radius: 0 8px 8px 0;
+            padding: 0.75rem 1.25rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 2.2rem 0 1.2rem 0;
+            color: #0b1a2b;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        h2 i {
+            color: #3b82f6;
+            font-size: 1.6rem;
+            width: 2rem;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.8rem 0 0.8rem 0;
+            color: #1e3a5f;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h3 i {
+            color: #3b82f6;
+            font-size: 1.2rem;
+            width: 1.8rem;
+            text-align: center;
+        }
+
+        h4 {
+            font-size: 1.05rem;
+            margin: 1.2rem 0 0.4rem 0;
+            color: #1e3a5f;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #1e2f44;
+        }
+
+        /* ----- hero / intro block ----- */
+        .hero {
+            margin-bottom: 2rem;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: #e0edff;
+            color: #1a4b8c;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 1rem;
+            border-radius: 100px;
+            letter-spacing: 0.3px;
+            margin-bottom: 0.75rem;
+            border: 1px solid #b9d4ff;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #1e3a5f;
+            max-width: 800px;
+        }
+
+        /* ----- workshop overview (two-col layout on large) ----- */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            background: #f1f6fd;
+            border-radius: 1.5rem;
+            padding: 1.5rem 1.8rem;
+            margin: 1.8rem 0 2.2rem 0;
+            border: 1px solid #dbe9fe;
+        }
+
+        @media (min-width: 768px) {
+            .overview-grid {
+                grid-template-columns: 1fr 1fr;
+                padding: 2rem 2.2rem;
+            }
+        }
+
+        .overview-grid .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 500;
+            color: #0b1a2b;
+        }
+
+        .overview-grid .stat-item i {
+            color: #3b82f6;
+            font-size: 1.4rem;
+            width: 2rem;
+            text-align: center;
+        }
+
+        .overview-grid .stat-item span {
+            font-weight: 400;
+            color: #2c4b6e;
+        }
+
+        /* ----- module cards ----- */
+        .module-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        @media (min-width: 640px) {
+            .module-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .module-grid {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+        }
+
+        .module-card {
+            background: #ffffff;
+            border-radius: 1.2rem;
+            padding: 1.5rem 1.3rem;
+            box-shadow: 0 4px 12px rgba(0, 27, 55, 0.06);
+            border: 1px solid #e9f0f9;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px -8px rgba(0, 50, 100, 0.12);
+            border-color: #b9d4ff;
+        }
+
+        .module-card .card-icon {
+            background: #e0edff;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #1a4b8c;
+            margin-bottom: 0.9rem;
+        }
+
+        .module-card h4 {
+            margin-top: 0;
+            margin-bottom: 0.4rem;
+            font-size: 1.1rem;
+        }
+
+        .module-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.4rem 0 0 0;
+        }
+
+        .module-card ul li {
+            font-size: 0.95rem;
+            color: #1e3a5f;
+            padding: 0.3rem 0 0.3rem 1.3rem;
+            position: relative;
+            border-bottom: 1px solid #f0f6ff;
+        }
+
+        .module-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .module-card ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        /* ----- hands-on & who should attend (two col) ----- */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 2rem 0 1.5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .feature-block {
+            background: #f9fcff;
+            border-radius: 1.5rem;
+            padding: 1.8rem 1.8rem 1.2rem 1.8rem;
+            border: 1px solid #e9f0f9;
+        }
+
+        .feature-block ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0 0;
+        }
+
+        .feature-block ul li {
+            padding: 0.5rem 0 0.5rem 1.8rem;
+            position: relative;
+            font-size: 1rem;
+            color: #1e3a5f;
+            border-bottom: 1px solid #ecf3fc;
+        }
+
+        .feature-block ul li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-block ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: 700;
+        }
+
+        .feature-block .icon-big {
+            font-size: 2rem;
+            color: #3b82f6;
+            margin-bottom: 0.3rem;
+            display: inline-block;
+        }
+
+        /* ----- CTA / contact ----- */
+        .cta-section {
+            background: #0b1a2b;
+            border-radius: 1.5rem;
+            padding: 2.2rem 2rem;
+            margin: 2.8rem 0 0.5rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: #ffffff;
+            border: 1px solid #1e3a5f;
+        }
+
+        .cta-section h2 {
+            color: #ffffff;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.8rem;
+        }
+
+        .cta-section h2 i {
+            color: #60a5fa;
+        }
+
+        .cta-section p {
+            color: #cbddee;
+            max-width: 550px;
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            background: #3b82f6;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.85rem 2.2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.1s ease;
+            border: 1px solid #60a5fa;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+        }
+
+        .cta-btn:hover {
+            background: #2563eb;
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .cta-btn i {
+            font-size: 1rem;
+        }
+
+        /* ----- divider / separator ----- */
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, #dbe9fe, transparent);
+            margin: 1.8rem 0 0.5rem 0;
+            border: 0;
+        }
+
+        /* ----- utility spacing ----- */
+        .mt-1 {
+            margin-top: 0.5rem;
+        }
+        .mt-2 {
+            margin-top: 1.5rem;
+        }
+        .mb-1 {
+            margin-bottom: 0.5rem;
+        }
+        .text-muted {
+            color: #4a6a8a;
+        }
+
+        /* small screens tweaks */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            .cta-section {
+                padding: 1.8rem 1.2rem;
+            }
+            .cta-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-links a,
+        .footer-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            text-decoration: none;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: #eef8ff;
+            color: #0f766e;
+            border: 1px solid #c7f0ee;
+        }
+
+        .nav-links a:hover,
+        .footer-nav a:hover {
+            background: #ddf6f4;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin: 1rem 0 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+            <a href="/about"><i class="fas fa-info-circle"></i> About</a>
+            <a href="/workshops"><i class="fas fa-tools"></i> Workshops</a>
+            <a href="/contact"><i class="fas fa-envelope"></i> Contact</a>
+        </div>
+
+        <!-- ====== HERO ====== -->
+        <div class="hero">
+            <div class="badge"><i class="fas fa-graduation-cap" style="margin-right:6px;"></i> Skilloria Studio</div>
+            <h1>Data Science &amp; Machine Learning Workshop</h1>
+            <div class="subhead">
+                <i class="fas fa-rocket" style="margin-right:10px; color:#3b82f6;"></i>
+                Practical, hands-on workshops that turn concepts into real-world capability.
+            </div>
+            <p>
+                Skilloria Studio delivers practical, hands-on workshops that help students, professionals,
+                and organizations turn technology concepts into real-world capability. This professional
+                workshop bridges the gap between theoretical modeling and practical implementation,
+                equipping you with the skills to extract actionable insights and build predictive solutions.
+            </p>
+        </div>
+
+        <!-- ====== WORKSHOP OVERVIEW ====== -->
+        <div class="overview-grid">
+            <div class="stat-item">
+                <i class="fas fa-database"></i>
+                <span><strong>Complete Data Lifecycle</strong><br />From raw wrangling to deployment</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-tools"></i>
+                <span><strong>Industry-Standard Tools</strong><br />Python, Pandas, NumPy, Scikit-learn</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-chart-line"></i>
+                <span><strong>Predictive Intelligence</strong><br />Supervised &amp; unsupervised learning</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-laptop-code"></i>
+                <span><strong>Real-World Datasets</strong><br />Messy, practical, and ready to explore</span>
+            </div>
+        </div>
+
+        <!-- ====== KEY MODULES ====== -->
+        <h2><i class="fas fa-cubes"></i> Key Modules &amp; Curriculum</h2>
+
+        <div class="module-grid">
+
+            <!-- Module 1 -->
+            <div class="module-card">
+                <div class="card-icon"><i class="fab fa-python"></i></div>
+                <h4>1. Foundations of Python for Data Science</h4>
+                <ul>
+                    <li><strong>Python Essentials:</strong> Core programming, data structures, functions</li>
+                    <li><strong>NumPy:</strong> Array ops, vectorization, math</li>
+                    <li><strong>Pandas:</strong> Loading, cleaning, filtering, aggregation</li>
+                </ul>
+            </div>
+
+            <!-- Module 2 -->
+            <div class="module-card">
+                <div class="card-icon"><i class="fas fa-chart-pie"></i></div>
+                <h4>2. Exploratory Data Analysis &amp; Visualization</h4>
+                <ul>
+                    <li><strong>Data Wrangling:</strong> Missing values, outliers, feature transform</li>
+                    <li><strong>Visualization:</strong> Matplotlib &amp; Seaborn for insights</li>
+                    <li><strong>Statistical Analysis:</strong> Summary stats, correlation matrices</li>
+                </ul>
+            </div>
+
+            <!-- Module 3 -->
+            <div class="module-card">
+                <div class="card-icon"><i class="fas fa-brain"></i></div>
+                <h4>3. Machine Learning Fundamentals &amp; Modeling</h4>
+                <ul>
+                    <li><strong>Supervised Learning:</strong> Regression &amp; classification models</li>
+                    <li><strong>Unsupervised Learning:</strong> Clustering (K-Means) for patterns</li>
+                    <li><strong>Model Evaluation:</strong> Accuracy, precision, recall, F1, MSE, CV</li>
+                </ul>
+            </div>
+
+            <!-- Module 4 -->
+            <div class="module-card">
+                <div class="card-icon"><i class="fas fa-robot"></i></div>
+                <h4>4. Advanced Topics &amp; Real-World Application</h4>
+                <ul>
+                    <li><strong>Feature Engineering:</strong> Selection &amp; scaling for performance</li>
+                    <li><strong>Intro to Deep Learning:</strong> Neural network basics</li>
+                    <li><strong>Deployment Pipeline:</strong> Save &amp; serve models for predictions</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ====== HANDS-ON + WHO SHOULD ATTEND (two-col) ====== -->
+        <div class="feature-grid">
+
+            <!-- Hands-on -->
+            <div class="feature-block">
+                <div class="icon-big"><i class="fas fa-hand-pointer"></i></div>
+                <h3 style="margin-top:0.2rem;"><i class="fas fa-code"></i> Hands-On Learning Experience</h3>
+                <ul>
+                    <li><strong>Interactive Coding Labs:</strong> Notebook-driven exercises that turn theory into execution.</li>
+                    <li><strong>Real-World Datasets:</strong> Work with messy, real-world data to practice cleaning, EDA, and tuning.</li>
+                    <li><strong>Takeaway Resources:</strong> Reusable code templates, Jupyter notebooks, and reference guides.</li>
+                </ul>
+            </div>
+
+            <!-- Who should attend -->
+            <div class="feature-block">
+                <div class="icon-big"><i class="fas fa-users"></i></div>
+                <h3 style="margin-top:0.2rem;"><i class="fas fa-user-check"></i> Who Should Attend?</h3>
+                <ul>
+                    <li><strong>Professionals &amp; Analysts</strong> transitioning to data science or leveling up their toolkit.</li>
+                    <li><strong>Software Engineers</strong> integrating ML models into applications.</li>
+                    <li><strong>Researchers &amp; Domain Experts</strong> leveraging predictive analytics in their fields.</li>
+                    <li><strong>Students &amp; Tech Enthusiasts</strong> building industry-ready portfolio projects.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ====== DIVIDER ====== -->
+        <hr class="divider" />
+
+        <!-- ====== CTA ====== -->
+        <div class="cta-section">
+            <h2><i class="fas fa-bolt"></i> Ready to unlock the power of your data?</h2>
+            <p>
+                Schedule this workshop for your team or organization and start turning data into
+                actionable intelligence.
+            </p>
+            <a href="https://www.google.com/search?q=%23" target="_blank" class="cta-btn">
+                <i class="fas fa-calendar-check"></i> Contact us today
+            </a>
+        </div>
+
+        <!-- small footer note -->
+        <p style="text-align:center; margin-top:2rem; font-size:0.85rem; color:#4a6a8a; border-top:1px solid #ecf3fc; padding-top:1.5rem;">
+            <i class="fas fa-cube" style="margin-right:6px; color:#3b82f6;"></i>
+            Skilloria Studio — Data Science &amp; Machine Learning Workshop
+        </p>
+
+    </div>
+    <!-- end container -->
+</body>
+</html>
