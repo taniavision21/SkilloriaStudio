@@ -413,10 +413,37 @@
                 justify-content: center;
             }
         }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            text-decoration: none;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: #f5f3ff;
+            color: #6d28d9;
+            border: 1px solid #e9ddff;
+        }
+
+        .nav-links a:hover {
+            background: #ede9fe;
+        }
+
+        
     </style>
 </head>
 <body>
     <div class="container">
+        
 
         <!-- ====== HERO ====== -->
         <div class="hero">
@@ -456,7 +483,6 @@
         </div>
 
         <!-- ====== KEY MODULES ====== -->
-        <h2><i class="fas fa-cubes"></i> Key Modules &amp; Curriculum</h2>
 
         <div class="module-grid">
 
@@ -545,19 +571,6 @@
                 <i class="fas fa-calendar-check"></i> Contact us today
             </a>
         </div>
-
-        <div class="footer-nav">
-            <a href="/"><i class="fas fa-home"></i> Home</a>
-            <a href="/about"><i class="fas fa-info-circle"></i> About</a>
-            <a href="/workshops"><i class="fas fa-tools"></i> Workshops</a>
-            <a href="/contact"><i class="fas fa-envelope"></i> Contact</a>
-        </div>
-
-        <!-- small footer note -->
-        <p style="text-align:center; margin-top:2rem; font-size:0.85rem; color:#4a6a8a; border-top:1px solid #eff6ff; padding-top:1.5rem;">
-            <i class="fas fa-cube" style="margin-right:6px; color:#2563eb;"></i>
-            Skilloria Studio — Programming Bootcamps
-        </p>
 
     </div>
     <!-- end container -->

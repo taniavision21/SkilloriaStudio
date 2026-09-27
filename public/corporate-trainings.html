@@ -413,10 +413,38 @@
                 justify-content: center;
             }
         }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-links a{
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            text-decoration: none;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: #fef3c7;
+            color: #a16207;
+            border: 1px solid #fde68a;
+        }
+
+        .nav-links a:hover
+        {
+            background: #fde68a;
+        }
+
+        
     </style>
 </head>
 <body>
     <div class="container">
+        
 
         <!-- ====== HERO ====== -->
         <div class="hero">
@@ -546,19 +574,7 @@
                 <i class="fas fa-calendar-check"></i> Contact us today
             </a>
         </div>
-
-        <div class="footer-nav">
-            <a href="/"><i class="fas fa-home"></i> Home</a>
-            <a href="/about"><i class="fas fa-info-circle"></i> About</a>
-            <a href="/workshops"><i class="fas fa-tools"></i> Workshops</a>
-            <a href="/contact"><i class="fas fa-envelope"></i> Contact</a>
-        </div>
-
-        <!-- small footer note -->
-        <p style="text-align:center; margin-top:2rem; font-size:0.85rem; color:#5a6a7a; border-top:1px solid #f8f5ee; padding-top:1.5rem;">
-            <i class="fas fa-cube" style="margin-right:6px; color:#b8860b;"></i>
-            Skilloria Studio — Corporate AI Workshops
-        </p>
+        
 
     </div>
     <!-- end container -->

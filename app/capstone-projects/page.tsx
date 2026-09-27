@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const capstoneVideos = [
   {
     title: 'AI Applied Capstone Project 1',
@@ -20,10 +22,33 @@ export default function CapstoneProjectsPage() {
   return (
     <div className="container" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
       <section style={{ marginBottom: '2rem', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '2.75rem', marginBottom: '0.75rem' }}>AI Applied Capstone Projects</h1>
+        <h1 style={{ fontSize: '2.75rem', marginBottom: '0.75rem' }}>Applied Capstone Projects</h1>
         <p style={{ maxWidth: '750px', margin: '0 auto', color: '#555', fontSize: '1.1rem' }}>
-          Three student capstone projects completed under supervision, demonstrating practical AI applications and creative problem solving.
+          Practical projects demonstrating applied technology, data analysis, and creative problem solving.
         </p>
+      </section>
+
+      <section style={{ marginBottom: '2rem' }}>
+        <Link href="/capstone-projects/toronto-311" style={{ color: 'inherit', textDecoration: 'none' }}>
+          <article
+            style={{
+              background: '#eef5f1',
+              borderLeft: '5px solid #16826c',
+              padding: '1.25rem 1.5rem',
+            }}
+          >
+            <p style={{ color: '#467363', fontSize: '0.8rem', fontWeight: 700, marginBottom: '0.35rem' }}>
+              Civic data · Toronto Open Data · 2026
+            </p>
+            <h2 style={{ fontSize: '1.35rem', marginBottom: '0.4rem' }}>Toronto 311 Service Requests</h2>
+            <p style={{ color: '#52605a', maxWidth: '760px' }}>
+              Explore request volumes, current status, and ward-level patterns in a civic data dashboard.
+            </p>
+            <span style={{ color: '#126c5a', display: 'inline-block', fontWeight: 700, marginTop: '0.75rem' }}>
+              View dashboard
+            </span>
+          </article>
+        </Link>
       </section>
 
       <section

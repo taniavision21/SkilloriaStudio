@@ -413,10 +413,37 @@
                 justify-content: center;
             }
         }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            text-decoration: none;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: #f7f4ff;
+            color: #5b21b6;
+            border: 1px solid #e5dcff;
+        }
+
+        .nav-links a:hover {
+            background: #efe7ff;
+        }
+
+        
     </style>
 </head>
 <body>
     <div class="container">
+        
 
         <!-- ====== HERO ====== -->
         <div class="hero">
@@ -546,21 +573,7 @@
                 <i class="fas fa-calendar-check"></i> Contact us today
             </a>
         </div>
-
-        <div class="footer-nav">
-            <a href="/"><i class="fas fa-home"></i> Home</a>
-            <a href="/about"><i class="fas fa-info-circle"></i> About</a>
-            <a href="/workshops"><i class="fas fa-tools"></i> Workshops</a>
-            <a href="/contact"><i class="fas fa-envelope"></i> Contact</a>
-        </div>
-
-        <!-- small footer note -->
-        <p style="text-align:center; margin-top:2rem; font-size:0.85rem; color:#6b5a8a; border-top:1px solid #f0ecff; padding-top:1.5rem;">
-            <i class="fas fa-cube" style="margin-right:6px; color:#7c3aed;"></i>
-            Skilloria Studio — Artificial Intelligence &amp; Generative AI Workshop
-        </p>
-
-    </div>
+</div>
     <!-- end container -->
 </body>
 </html>
