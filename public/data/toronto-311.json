@@ -3,258 +3,269 @@
     "title": "311 Service Requests - Customer Initiated",
     "datasetUrl": "https://open.toronto.ca/dataset/311-service-requests-customer-initiated/",
     "resourceName": "311 Service Requests 2026",
-    "resourceUpdatedAt": "2026-09-08T20:00:17",
+    "resourceUpdatedAt": "2026-10-08T20:00:18",
     "year": 2026,
-    "generatedAt": "2026-09-27T01:21:38.180375+00:00",
+    "generatedAt": "2026-10-11T00:04:37.732390+00:00",
     "scopeNote": "This dataset covers customer-initiated requests captured by participating City divisions; it does not represent all 311 contacts.",
     "resolutionNote": "The published file has no completion timestamp, so request resolution time cannot be calculated."
   },
   "metrics": {
-    "totalRequests": 372859,
-    "completedRequests": 286169,
-    "completedShare": 0.7675,
-    "activeRequests": 47244,
-    "canceledRequests": 34490,
+    "totalRequests": 430607,
+    "completedRequests": 327567,
+    "completedShare": 0.7607,
+    "activeRequests": 56874,
+    "canceledRequests": 40112,
     "missingCreationDates": 0
   },
   "statuses": [
     {
       "name": "Completed",
-      "requests": 276307
+      "requests": 320075
     },
     {
       "name": "Cancelled",
-      "requests": 34490
+      "requests": 40112
     },
     {
       "name": "In Progress",
-      "requests": 29863
+      "requests": 34963
     },
     {
       "name": "New",
-      "requests": 17381
+      "requests": 21911
     },
     {
       "name": "Closed",
-      "requests": 9862
+      "requests": 7492
     },
     {
       "name": "Unknown",
-      "requests": 4956
+      "requests": 6054
     }
   ],
   "monthly": [
     {
       "month": "2026-01",
-      "requests": 59295,
-      "completed": 53044
+      "requests": 59285,
+      "completed": 53101
     },
     {
       "month": "2026-02",
-      "requests": 45806,
-      "completed": 40000
+      "requests": 45807,
+      "completed": 40063
     },
     {
       "month": "2026-03",
-      "requests": 41519,
-      "completed": 33965
+      "requests": 41518,
+      "completed": 34118
     },
     {
       "month": "2026-04",
-      "requests": 43771,
-      "completed": 34869
+      "requests": 43773,
+      "completed": 35162
     },
     {
       "month": "2026-05",
-      "requests": 47151,
-      "completed": 35374
+      "requests": 47144,
+      "completed": 36019
     },
     {
       "month": "2026-06",
-      "requests": 51718,
-      "completed": 36093
+      "requests": 51712,
+      "completed": 37201
     },
     {
       "month": "2026-07",
-      "requests": 47788,
-      "completed": 32072
+      "requests": 47785,
+      "completed": 33527
     },
     {
       "month": "2026-08",
-      "requests": 35811,
-      "completed": 20752
+      "requests": 44144,
+      "completed": 29687
+    },
+    {
+      "month": "2026-09",
+      "requests": 49439,
+      "completed": 28689
     }
   ],
   "wards": [
     {
       "name": "Toronto-Danforth (14)",
-      "requests": 23212,
-      "completed": 17070,
-      "completedShare": 0.7354
+      "requests": 26329,
+      "completed": 19374,
+      "completedShare": 0.7358
     },
     {
       "name": "Davenport (09)",
-      "requests": 21480,
-      "completed": 16607,
-      "completedShare": 0.7731
+      "requests": 24353,
+      "completed": 18752,
+      "completedShare": 0.77
     },
     {
       "name": "University-Rosedale (11)",
-      "requests": 20378,
-      "completed": 14844,
-      "completedShare": 0.7284
+      "requests": 23632,
+      "completed": 17073,
+      "completedShare": 0.7225
     },
     {
       "name": "Beaches-East York (19)",
-      "requests": 19715,
-      "completed": 15298,
-      "completedShare": 0.776
+      "requests": 22758,
+      "completed": 17393,
+      "completedShare": 0.7643
     },
     {
       "name": "Etobicoke-Lakeshore (03)",
-      "requests": 19072,
-      "completed": 14610,
-      "completedShare": 0.766
-    },
-    {
-      "name": "Parkdale-High Park (04)",
-      "requests": 18508,
-      "completed": 14506,
-      "completedShare": 0.7838
+      "requests": 21910,
+      "completed": 16786,
+      "completedShare": 0.7661
     },
     {
       "name": "Eglinton-Lawrence (08)",
-      "requests": 18287,
-      "completed": 14417,
-      "completedShare": 0.7884
+      "requests": 21860,
+      "completed": 16650,
+      "completedShare": 0.7617
+    },
+    {
+      "name": "Parkdale-High Park (04)",
+      "requests": 21247,
+      "completed": 16464,
+      "completedShare": 0.7749
     },
     {
       "name": "Toronto-St. Paul's (12)",
-      "requests": 17879,
-      "completed": 13718,
-      "completedShare": 0.7673
-    },
-    {
-      "name": "Scarborough Southwest (20)",
-      "requests": 16507,
-      "completed": 12591,
-      "completedShare": 0.7628
+      "requests": 20711,
+      "completed": 15751,
+      "completedShare": 0.7605
     },
     {
       "name": "Spadina-Fort York (10)",
-      "requests": 16492,
-      "completed": 11757,
-      "completedShare": 0.7129
+      "requests": 19118,
+      "completed": 13423,
+      "completedShare": 0.7021
+    },
+    {
+      "name": "Scarborough Southwest (20)",
+      "requests": 18708,
+      "completed": 14206,
+      "completedShare": 0.7594
     },
     {
       "name": "Etobicoke Centre (02)",
-      "requests": 16195,
-      "completed": 12893,
-      "completedShare": 0.7961
-    },
-    {
-      "name": "York South-Weston (05)",
-      "requests": 15556,
-      "completed": 12367,
-      "completedShare": 0.795
-    },
-    {
-      "name": "Toronto Centre (13)",
-      "requests": 15167,
-      "completed": 10803,
-      "completedShare": 0.7123
-    },
-    {
-      "name": "York Centre (06)",
-      "requests": 14596,
-      "completed": 11636,
-      "completedShare": 0.7972
-    },
-    {
-      "name": "Don Valley West (15)",
-      "requests": 14307,
-      "completed": 11241,
+      "requests": 18375,
+      "completed": 14437,
       "completedShare": 0.7857
     },
     {
+      "name": "York Centre (06)",
+      "requests": 17829,
+      "completed": 13890,
+      "completedShare": 0.7791
+    },
+    {
+      "name": "York South-Weston (05)",
+      "requests": 17759,
+      "completed": 13962,
+      "completedShare": 0.7862
+    },
+    {
+      "name": "Toronto Centre (13)",
+      "requests": 17551,
+      "completed": 12408,
+      "completedShare": 0.707
+    },
+    {
+      "name": "Don Valley West (15)",
+      "requests": 16815,
+      "completed": 13086,
+      "completedShare": 0.7782
+    },
+    {
       "name": "Scarborough-Rouge Park (25)",
-      "requests": 13436,
-      "completed": 10044,
-      "completedShare": 0.7475
+      "requests": 15417,
+      "completed": 11493,
+      "completedShare": 0.7455
     },
     {
       "name": "Scarborough Centre (21)",
-      "requests": 13260,
-      "completed": 10036,
-      "completedShare": 0.7569
+      "requests": 15059,
+      "completed": 11410,
+      "completedShare": 0.7577
     },
     {
       "name": "Willowdale (18)",
-      "requests": 11142,
-      "completed": 8600,
-      "completedShare": 0.7719
+      "requests": 13141,
+      "completed": 9995,
+      "completedShare": 0.7606
     },
     {
       "name": "Etobicoke North (01)",
-      "requests": 11012,
-      "completed": 8707,
-      "completedShare": 0.7907
+      "requests": 12833,
+      "completed": 10162,
+      "completedShare": 0.7919
     },
     {
       "name": "Scarborough-Guildwood (24)",
-      "requests": 10808,
-      "completed": 8206,
-      "completedShare": 0.7593
-    },
-    {
-      "name": "Scarborough-Agincourt (22)",
-      "requests": 9558,
-      "completed": 7530,
-      "completedShare": 0.7878
-    },
-    {
-      "name": "Don Valley North (17)",
-      "requests": 9489,
-      "completed": 7436,
-      "completedShare": 0.7836
+      "requests": 12476,
+      "completed": 9508,
+      "completedShare": 0.7621
     },
     {
       "name": "Humber River-Black Creek (07)",
-      "requests": 9316,
-      "completed": 7262,
-      "completedShare": 0.7795
+      "requests": 10998,
+      "completed": 8433,
+      "completedShare": 0.7668
+    },
+    {
+      "name": "Don Valley North (17)",
+      "requests": 10992,
+      "completed": 8581,
+      "completedShare": 0.7807
+    },
+    {
+      "name": "Scarborough-Agincourt (22)",
+      "requests": 10787,
+      "completed": 8449,
+      "completedShare": 0.7833
     },
     {
       "name": "Scarborough North (23)",
-      "requests": 8807,
-      "completed": 6947,
-      "completedShare": 0.7888
+      "requests": 10032,
+      "completed": 7915,
+      "completedShare": 0.789
     },
     {
       "name": "Don Valley East (16)",
-      "requests": 8670,
-      "completed": 7034,
-      "completedShare": 0.8113
+      "requests": 9906,
+      "completed": 7956,
+      "completedShare": 0.8031
     }
   ],
   "requestTypes": [
     {
       "name": "Road Pothole / Road Damage",
-      "requests": 23278,
-      "completed": 21230,
-      "completedShare": 0.912
+      "requests": 24387,
+      "completed": 22317,
+      "completedShare": 0.9151
     },
     {
       "name": "Property Standards and Maintenance Violations",
-      "requests": 13590,
-      "completed": 8496,
-      "completedShare": 0.6252
+      "requests": 15684,
+      "completed": 10026,
+      "completedShare": 0.6393
     },
     {
       "name": "Residential Bin Lid Damaged",
-      "requests": 12822,
-      "completed": 12365,
-      "completedShare": 0.9644
+      "requests": 14623,
+      "completed": 14064,
+      "completedShare": 0.9618
+    },
+    {
+      "name": "Tree Emergency Clean-Up",
+      "requests": 11294,
+      "completed": 6872,
+      "completedShare": 0.6085
     },
     {
       "name": "Sidewalk Snow Clearing Required",
@@ -263,28 +274,28 @@
       "completedShare": 0.9879
     },
     {
-      "name": "Road Plowing Request",
-      "requests": 10933,
-      "completed": 10787,
-      "completedShare": 0.9866
+      "name": "Injured - Wildlife",
+      "requests": 11098,
+      "completed": 9747,
+      "completedShare": 0.8783
     },
     {
       "name": "General Pruning",
-      "requests": 8691,
-      "completed": 787,
-      "completedShare": 0.0906
+      "requests": 10993,
+      "completed": 958,
+      "completedShare": 0.0871
     },
     {
-      "name": "Injured - Wildlife",
-      "requests": 8558,
-      "completed": 7545,
-      "completedShare": 0.8816
+      "name": "Road Plowing Request",
+      "requests": 10933,
+      "completed": 10788,
+      "completedShare": 0.9867
     },
     {
       "name": "Pick up Dead Wildlife",
-      "requests": 7211,
-      "completed": 5711,
-      "completedShare": 0.792
+      "requests": 9655,
+      "completed": 7551,
+      "completedShare": 0.7821
     },
     {
       "name": "Driveway Blocked By Plowed Snowbank",
@@ -293,66 +304,60 @@
       "completedShare": 0.9576
     },
     {
-      "name": "Tree Emergency Clean-Up",
-      "requests": 6614,
-      "completed": 4464,
-      "completedShare": 0.6749
+      "name": "Amplified or Musical Instrument Noise",
+      "requests": 6675,
+      "completed": 5571,
+      "completedShare": 0.8346
     },
     {
       "name": "Long Grass and Prohibited Plants on Private Property",
-      "requests": 5934,
-      "completed": 2492,
-      "completedShare": 0.42
-    },
-    {
-      "name": "Amplified or Musical Instrument Noise",
-      "requests": 5385,
-      "completed": 4659,
-      "completedShare": 0.8652
+      "requests": 6558,
+      "completed": 3322,
+      "completedShare": 0.5066
     }
   ],
   "divisions": [
     {
       "name": "Transportation Services",
-      "requests": 134064,
-      "completed": 115305,
-      "completedShare": 0.8601
+      "requests": 147658,
+      "completed": 126202,
+      "completedShare": 0.8547
     },
     {
       "name": "Solid Waste Management Services",
-      "requests": 91467,
-      "completed": 76136,
-      "completedShare": 0.8324
+      "requests": 102768,
+      "completed": 85526,
+      "completedShare": 0.8322
     },
     {
       "name": "Municipal Licensing & Standards",
-      "requests": 81455,
-      "completed": 58085,
-      "completedShare": 0.7131
-    },
-    {
-      "name": "Toronto Water",
-      "requests": 29867,
-      "completed": 19182,
-      "completedShare": 0.6422
+      "requests": 97517,
+      "completed": 70909,
+      "completedShare": 0.7271
     },
     {
       "name": "Environment",
-      "requests": 27074,
-      "completed": 10404,
-      "completedShare": 0.3843
+      "requests": 37735,
+      "completed": 14487,
+      "completedShare": 0.3839
+    },
+    {
+      "name": "Toronto Water",
+      "requests": 34317,
+      "completed": 22189,
+      "completedShare": 0.6466
     },
     {
       "name": "Parks and Recreation",
-      "requests": 5848,
-      "completed": 4271,
-      "completedShare": 0.7303
+      "requests": 7202,
+      "completed": 5189,
+      "completedShare": 0.7205
     },
     {
       "name": "311",
-      "requests": 3084,
-      "completed": 2786,
-      "completedShare": 0.9034
+      "requests": 3410,
+      "completed": 3065,
+      "completedShare": 0.8988
     }
   ]
 }
